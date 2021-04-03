@@ -1,4 +1,4 @@
-# Dimensionfinder
+# DimensionFinder
 
 Simple Tool that allows you to find possible Strings for a given Dimension ID
 
@@ -31,7 +31,9 @@ This tool brute-forces the book's text to find text, which leads to the dimensio
 [Guava](https://mvnrepository.com/artifact/com.google.guava/guava) For the Hashing method<br>
 [JetBrains Annotations](https://mvnrepository.com/artifact/org.jetbrains/annotations) For @Nullable, …
 
-### Dimension IDs you might want to know (for Speed Runs, etc)
+# Other-Information
+
+## Dimension IDs you might want to know (for Speed Runs, etc)
 
 <ul>
 <li>2: The End</li>
@@ -41,16 +43,6 @@ This tool brute-forces the book's text to find text, which leads to the dimensio
 
 ## List of Strings for the “normal” Dimensions
 
-TODO: add stuff
-
-### Overworld
-
-TODO: add stuff
-
-### The Nether
-
-TODO: add stuff
-
-### The End
-
-TODO: add stuff
+Copy and Paste the text (without “”) into a book, throw it in a nether portal and travel to the specific dimension!
+You can find the results in [7-Character Search](result_seven_character_search.txt)
+and [6-Character Search](result_six_character_search.txt). Seven Character search took way too long by the way…
