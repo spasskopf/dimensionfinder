@@ -26,7 +26,7 @@ This tool brute-forces the book's text to find text, which leads to the dimensio
 <li>Run the Main class (DimensionFinder)</li>
 </ul>
 
-## Dependencies
+# Dependencies
 
 [Guava](https://mvnrepository.com/artifact/com.google.guava/guava) For the Hashing method<br>
 [JetBrains Annotations](https://mvnrepository.com/artifact/org.jetbrains/annotations) For @Nullable, …
@@ -46,3 +46,7 @@ This tool brute-forces the book's text to find text, which leads to the dimensio
 Copy and Paste the text (without “”) into a book, throw it in a nether portal and travel to the specific dimension!
 You can find the results in [7-Character Search](result_seven_character_search.txt)
 and [6-Character Search](result_six_character_search.txt). Seven Character search took way too long by the way…
+
+## Simple Fabric-Mod that lets you view the hashes in-game
+
+[Simple Mod.](https://github.com/spasskopf/dimensionfinder-fabric-mod)
