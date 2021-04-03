@@ -20,35 +20,21 @@ public class Test {
      *
      * @param args program arguments
      */
-    public static void main(String[] args) {
-        final char[] chars = getChars();
-        final int length = 40;
-        final int cl = chars.length;
+    public static void main(final String[] args) {
+        final char[] chars = {'0', '1', '2'};
+        final int LENGTH = 5;
+        System.out.println("Math.pow(chars.length, LENGTH) = " + Math.pow(chars.length, LENGTH));
 
-
-        int[] last = new int[length];
-        Arrays.fill(last, cl - 1);
-        StringIterator it = new StringIterator(chars, length, last);
-        FinderTask task = new FinderTask(it, 3);
-
-        task.startSearching();
-        System.out.println("Finished searching!");
-        task.found.forEach(System.out::println);
-    }
-
-    private static double durchschnitt(List<Long> time) {
-        double value = 0;
-        for (Long aLong : time) {
-            value += aLong;
-        }
-        return value / (double) time.size();
+        final StringIterator it = StringIterator.getIteratorFromOffset(20, LENGTH, chars);
+        System.out.println("it.position = " + Arrays.toString(it.getPosition()));
     }
 
     private static char[] getChars() {
         return new char[]{
                 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '};
+                // 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '
+        };
     }
 
 }

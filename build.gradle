@@ -16,8 +16,18 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.guava/guava
     implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
 
+    // https://mvnrepository.com/artifact/org.jetbrains/annotations
+    implementation group: 'org.jetbrains', name: 'annotations', version: '20.1.0'
 }
 
 test {
     useJUnitPlatform()
+}
+compileJava {
+    options.encoding = "UTF-8"
+    apply plugin: 'java'
+}
+
+compileTestJava {
+   options.encoding = "UTF-8"
 }
