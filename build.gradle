@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'me.spasskop'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
+
+}
+
+test {
+    useJUnitPlatform()
+}
