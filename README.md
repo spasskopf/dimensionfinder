@@ -20,12 +20,18 @@ This tool brute-forces the book's text to find text, which leads to the dimensio
 
 <ul>
 <li>Clone this repository</li>
-<li>Change the dimension ID you are looking for</li>
-<li>Run the Main class(DimensionFinder)</li>
-<li>Make my code faster (or spend some time waiting)</li>
+<li>Edit the Main Class (DimensionFinder)</li>
+<li>Optional: Change the dimension IDs you are looking for</li>
+<li>Optional: Change the characters the text can contains</li>
+<li>Run the Main class (DimensionFinder)</li>
 </ul>
 
-### Dimension IDs you might want to know (for Speedruns, etc)
+## Dependencies
+
+[Guava](https://mvnrepository.com/artifact/com.google.guava/guava) For the Hashing method<br>
+[JetBrains Annotations](https://mvnrepository.com/artifact/org.jetbrains/annotations) For @Nullable, …
+
+### Dimension IDs you might want to know (for Speed Runs, etc)
 
 <ul>
 <li>2: The End</li>
@@ -33,11 +39,18 @@ This tool brute-forces the book's text to find text, which leads to the dimensio
 <li>0: The Nether</li>
 </ul>
 
-##List of Strings for the “normal” Dimensions
+## List of Strings for the “normal” Dimensions
+
 TODO: add stuff
-###Overworld
+
+### Overworld
+
 TODO: add stuff
-###The Nether
+
+### The Nether
+
 TODO: add stuff
-###The End
+
+### The End
+
 TODO: add stuff
