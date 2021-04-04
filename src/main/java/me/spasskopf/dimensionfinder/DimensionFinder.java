@@ -91,7 +91,7 @@ public class DimensionFinder {
      * <p>
      * Formula for calculating the number of unique combinations:<br>
      * <pre>
-     *         numberOfCharacters pow length
+     * numberOfCharacters pow length
      * </pre>
      * In this method:
      * <pre>
@@ -159,11 +159,13 @@ public class DimensionFinder {
         try {
             //Round to one decimal
             final DecimalFormat df = new DecimalFormat("###.##");
+            df.setMinimumFractionDigits(2);
+            df.setMaximumFractionDigits(2);
+
             //Progressbar
             StringBuilder progress;
             //Wait for the tasks to finish
             boolean finished;
-
 
             do {
                 double searched = possibleCombinations - threads.length * stringsPerThread;
@@ -171,6 +173,8 @@ public class DimensionFinder {
                 progress = new StringBuilder("Progress: [");
 
                 finished = true;
+
+                //Add Thread-Status to the progressbar
                 for (int i = 0; i < threads.length; i++) {
                     if (threads[i].isAlive()) {
                         finished = false;
@@ -187,6 +191,7 @@ public class DimensionFinder {
                     progress.append(df.format(finder[i].getSearched() * 100 / finder[i].getAmount()))
                             .append("%");
 
+                    //Add Separator
                     if (i != threads.length - 1) {
                         progress.append(" | ");
                     } else {
@@ -197,13 +202,16 @@ public class DimensionFinder {
 
                 }
 
-                progress.append("-> ").append(df.format(searched * 100 / possibleCombinations));
+                progress.append("-> ")
+                        .append(df.format(searched * 100 / possibleCombinations))
+                        .append("%");
                 //Carriage return.
                 progress.append("\r");
                 System.out.print(progress.toString());
 
                 TimeUnit.SECONDS.sleep(1);
             } while (!finished);
+
         } catch (final InterruptedException e) {
             e.printStackTrace();
         }

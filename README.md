@@ -43,7 +43,7 @@ This tool brute-forces the book's text to find text, which leads to the dimensio
 
 ## List of Strings for the “normal” Dimensions
 
-Copy and Paste the text (without “”) into a book, throw it in a nether portal and travel to the specific dimension!
+Copy and Paste the text into a book, throw it in a nether portal and travel to the specific dimension!
 You can find the results in [7-Character Search](result_seven_character_search.txt)
 and [6-Character Search](result_six_character_search.txt). Seven Character search took way too long by the way…
 

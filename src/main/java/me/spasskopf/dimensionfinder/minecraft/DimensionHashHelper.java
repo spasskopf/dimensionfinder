@@ -8,10 +8,11 @@ import java.nio.charset.StandardCharsets;
 /**
  * Class which generates the Dimension ID for the given input String
  */
+@SuppressWarnings("UnstableApiUsage")
 public class DimensionHashHelper {
 
     /**
-     * Mojang's Salt String. Why did they even choose this???
+     * Mojang's Salt String. Why did they even choose this?
      */
     public static final String SALT = ":why_so_salty#LazyCrypto";
     /**
