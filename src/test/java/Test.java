@@ -1,13 +1,10 @@
-package me.spasskopf.dimensionfinder;
+import me.spasskopf.dimensionfinder.StringIterator;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
 
 /**
  * Test Class
+ * Deprecated because test class
  */
 @Deprecated
 public class Test {
