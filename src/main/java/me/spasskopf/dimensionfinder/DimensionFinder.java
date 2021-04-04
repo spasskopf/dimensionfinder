@@ -102,14 +102,16 @@ public class DimensionFinder {
      * @param textLength         the length of the text. High length = Many combinations = Takes very very long
      * @param targetDimensionIds the dimensionIDs we are looking for
      * @return a Map containing the inputted dimensions IDs as Keys and a List with all Strings as Object
-     * @throws IllegalArgumentException the length of targetDimensionIDs is zero
+     * @throws IllegalArgumentException the length of targetDimensionIDs is zero, or any other parameter is zero
      */
+    //Suppress Constant Conditions because IntelliJ thinks @Range throws an exception but it does not...
+    @SuppressWarnings("ConstantConditions")
     @NotNull
     private static Map<Integer, List<String>> startSearching(@Range(from = 1, to = Integer.MAX_VALUE) final int threadCount,
                                                              @Range(from = 1, to = Integer.MAX_VALUE) final int textLength,
                                                              @Range(from = 1, to = Integer.MAX_VALUE) final int... targetDimensionIds) {
-        if (targetDimensionIds.length <= 0) {
-            throw new IllegalArgumentException("You need to specify what to search for!");
+        if (threadCount <= 0 || textLength <= 0 || targetDimensionIds.length <= 0 || CHARS.length <= 0) {
+            throw new IllegalArgumentException("Wrong parameters!");
         }
 
         final long startTime = System.currentTimeMillis();
