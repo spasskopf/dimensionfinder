@@ -1,6 +1,7 @@
 package me.spasskopf.dimensionfinder;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -101,9 +102,16 @@ public class DimensionFinder {
      * @param textLength         the length of the text. High length = Many combinations = Takes very very long
      * @param targetDimensionIds the dimensionIDs we are looking for
      * @return a Map containing the inputted dimensions IDs as Keys and a List with all Strings as Object
+     * @throws IllegalArgumentException the length of targetDimensionIDs is zero
      */
     @NotNull
-    private static Map<Integer, List<String>> startSearching(final int threadCount, final int textLength, final int... targetDimensionIds) {
+    private static Map<Integer, List<String>> startSearching(@Range(from = 1, to = Integer.MAX_VALUE) final int threadCount,
+                                                             @Range(from = 1, to = Integer.MAX_VALUE) final int textLength,
+                                                             @Range(from = 1, to = Integer.MAX_VALUE) final int... targetDimensionIds) {
+        if (targetDimensionIds.length <= 0) {
+            throw new IllegalArgumentException("You need to specify what to search for!");
+        }
+
         final long startTime = System.currentTimeMillis();
         //Thread safe
         final Map<Integer, List<String>> occurences = new ConcurrentHashMap<>();
