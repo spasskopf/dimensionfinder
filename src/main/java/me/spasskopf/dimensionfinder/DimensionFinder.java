@@ -116,10 +116,10 @@ public class DimensionFinder {
 
         final long startTime = System.currentTimeMillis();
         //Thread safe
-        final Map<Integer, List<String>> occurences = new ConcurrentHashMap<>();
+        final Map<Integer, List<String>> occurrences = new ConcurrentHashMap<>();
         //Initialize Map, so there is no need for null-checking afterwards
         for (final int i : targetDimensionIds) {
-            occurences.put(i, Collections.synchronizedList(new ArrayList<>()));
+            occurrences.put(i, Collections.synchronizedList(new ArrayList<>()));
         }
         //All worker-Threads
         final Thread[] threads = new Thread[threadCount];
@@ -148,7 +148,7 @@ public class DimensionFinder {
             final FinderTask task = new FinderTask(iterator, possibleCombinations - threads.length * stringsPerThread, targetDimensionIds);
             task.startSearching();
             //Add the values
-            task.found.forEach(((integer, strings) -> occurences.get(integer).addAll(strings)));
+            task.found.forEach(((integer, strings) -> occurrences.get(integer).addAll(strings)));
             System.out.println("Finished!");
         }
         System.out.println("Starting threads now...");
@@ -211,12 +211,12 @@ public class DimensionFinder {
         System.out.println("Finished searching!");
         //Add the values
         for (final FinderTask task : finder) {
-            task.found.forEach(((integer, strings) -> occurences.get(integer).addAll(strings)));
+            task.found.forEach(((integer, strings) -> occurrences.get(integer).addAll(strings)));
         }
 
         System.out.printf("Searching Took %s seconds!%n", (System.currentTimeMillis() - startTime) / 1000);
 
-        return occurences;
+        return occurrences;
     }
 
 
