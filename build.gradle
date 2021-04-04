@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'me.spasskop'
+group 'me.spasskopf'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -29,7 +29,7 @@ compileJava {
 }
 
 compileTestJava {
-   options.encoding = "UTF-8"
+    options.encoding = "UTF-8"
 }
 
 jar {
