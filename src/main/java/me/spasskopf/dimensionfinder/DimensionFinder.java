@@ -20,7 +20,7 @@ public class DimensionFinder {
     /**
      * Characters the text can contain. Change this if you want to
      */
-    public static final char[] CHARS = new char[]{
+    public static char[] CHARS = new char[]{
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
             // 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' '
@@ -28,7 +28,7 @@ public class DimensionFinder {
     /**
      * What hashed IDs to search for. Change this if you want to
      */
-    public static final int[] DIMENSION_IDS = new int[]{0, 1, 2};
+    public static int[] DIMENSION_IDS = new int[]{0, 1, 2};
 
     /**
      * The Path of the file, where the results get saved in.
@@ -37,27 +37,126 @@ public class DimensionFinder {
 
     /**
      * Main Method
+     * <p>
+     * Providing zero arguments or specifying not all required arguments wil ask the user to inout values!
+     * Arguments:
+     * {num}: any whole (0,1,2,3, ...) number
+     *
+     * <table>
+     *
+     *     <th>Argument</th>
+     *     <th>Required</th>
+     *     <th>Description</th>
+     *     <th>Example</th>
+     *     <tr>
+     *         <td>-threads={num}</td>
+     *         <td>yes</td>
+     *         <td>Number of Threads you want to use</td>
+     *         <td>-threads=16</td>
+     *     </tr>
+     *     <tr>
+     *         <td>-length={num}</td>
+     *         <td>yes</td>
+     *         <td>Length of the output text</td>
+     *         <td>-length=6</td>
+     *     </tr>
+     *     <tr>
+     *         <td>-IDs</td>
+     *         <td>no (defaults to 1,2,3)</td>
+     *         <td>What IDs you want to search for. Separated with ','</td>
+     *         <td>-IDs=1;2;3;4;5;6</td>
+     *     </tr>
+     *
+     *     <td>-chars=</td>
+     *     <td>mo (defaults to lowercase alphabet + space + 0-9)</td>
+     *     <td>The Characters the text can contain. NOTE: Can only be the LAST PARAMETER!!! Otherwise it would be difficult to separate characters/options</td>
+     *     <td>-chars=abcdefgh132465798 ABCDE</td>
+     *
+     * </table>
      *
      * @param args the program arguments
      */
     public static void main(final String[] args) {
-        final int threads;
-        final int textLength;
+        int threads = -1;
+        int textLength = -1;
 
 
-        try {
-            final Scanner scanner = new Scanner(System.in);
-            System.out.printf("Enter the number of threads you want to use. You have %d threads available...%n", Runtime.getRuntime().availableProcessors());
-            threads = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter the text-length. Higher value = more combinations = takes much longer!");
-            textLength = Integer.parseInt(scanner.nextLine());
+        if (args.length != 0) {
+            for (String arg : args) {
+                arg = arg.toLowerCase(Locale.ROOT);
+                if (arg.startsWith("-threads=")) {
+                    final String substring = arg.substring("-threads=".length());
+                    try {
+                        final int anInt = Integer.parseInt(substring);
+                        if (anInt <= 0) {
+                            System.err.println("Thread count must not be less than one!");
+                            System.exit(-1);
+                        }
+                        threads = anInt;
+                    } catch (NumberFormatException e) {
+                        System.err.println(substring + " is not a valid number! Try again please");
+                        System.exit(-1);
+                    }
 
-        } catch (final NumberFormatException e) {
-            //User error
-            System.err.println("This is not a valid number! Try again please");
-            e.printStackTrace();
-            System.exit(-1);
-            return;
+                } else if (arg.startsWith("-length=")) {
+                    final String substring = arg.substring("-length=".length());
+                    try {
+                        final int anInt = Integer.parseInt(substring);
+                        if (anInt <= 0) {
+                            System.err.println("Length must not be less than one!");
+                            System.exit(-1);
+                        }
+                        textLength = anInt;
+                    } catch (NumberFormatException e) {
+                        System.err.println(substring + " is not a valid number! Try again please");
+                        System.exit(-1);
+                    }
+
+                } else if (arg.startsWith("-ids=")) {
+                    final String substring = arg.substring("-ids=".length());
+                    String current = "";
+                    try {
+                        final String[] split = substring.split(";");
+                        DIMENSION_IDS = new int[split.length];
+                        for (int i = 0; i < split.length; i++) {
+                            current = split[i];
+                            DIMENSION_IDS[i] = Integer.parseInt(split[i]);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.err.println(current + " is not a valid number! Try again please");
+                        System.exit(-1);
+                    }
+                } else if (arg.startsWith("-chars=")) {
+                    final String joined = String.join(" ", args);
+                    String substring = joined.substring(joined.indexOf("-chars=") + "-chars=".length());
+                    System.out.println("[INFO] Character option is used! Treating " + substring + " as Character Array!");
+                    CHARS = substring.toCharArray();
+                }
+            }
+        }
+
+
+        if (threads == -1 || textLength == -1) {
+
+            try {
+                final Scanner scanner = new Scanner(System.in);
+
+                if (threads == -1) {
+                    System.out.printf("Enter the number of threads you want to use. You have %d threads available...%n", Runtime.getRuntime().availableProcessors());
+                    threads = Integer.parseInt(scanner.nextLine());
+                }
+                if (textLength == -1) {
+                    System.out.println("Enter the text-length. Higher value = more combinations = takes much longer!");
+                    textLength = Integer.parseInt(scanner.nextLine());
+                }
+
+            } catch (final NumberFormatException e) {
+                //User error
+                System.err.println("This is not a valid number! Try again please");
+                e.printStackTrace();
+                System.exit(-1);
+                return;
+            }
         }
 
         final Map<Integer, List<String>> result = startSearching(threads, textLength, DIMENSION_IDS);
@@ -113,6 +212,23 @@ public class DimensionFinder {
         if (threadCount <= 0 || textLength <= 0 || targetDimensionIds.length <= 0 || CHARS.length <= 0) {
             throw new IllegalArgumentException("Wrong parameters!");
         }
+
+        System.out.printf("""
+                         Starting search!
+                         =======================
+                         Parameters:
+                             ThreadCount   : %d
+                             Text length   : %d
+                             Dimension IDs : %s
+                             Characters    : %s
+                        =======================
+                                                
+                         """,
+                threadCount,
+                textLength,
+                Arrays.toString(targetDimensionIds),
+                Arrays.toString(CHARS));
+
 
         final long startTime = System.currentTimeMillis();
         //Thread safe
