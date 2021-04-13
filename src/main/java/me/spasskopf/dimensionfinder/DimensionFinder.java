@@ -22,30 +22,29 @@ public class DimensionFinder {
     /**
      * Help text
      */
-    public static final String HELP_TEXT = """
-            Available Options:
-                 -threads={num}
-                    required: yes
-                    Number of Threads you want to use
-                    example: -threads=16
-
-                 -length={num}
-                    required: yes
-                    Length of the output text
-                    example: -length=6
-
-                 -IDs={num1};{num2};....
-                    required: no (defaults to 1,2,3)
-                    What IDs you want to search for. Separated with ','
-                    example: -IDs=1;2;3;4;5;6
-
-                -chars=characters
-                    required: no (defaults to lowercase alphabet + space + 0-9)</td>
-                    The Characters the text can contain.
-                     NOTE: Can only be the LAST PARAMETER!!! Otherwise it would be difficult to separate characters/options
-                    example: -chars=abcdefgh132465798 ABCDE
-
-            """;
+    public static final String HELP_TEXT =
+            "Available Options:" + "\n" +
+                    "     -threads={num}" + "\n" +
+                    "        required: yes" + "\n" +
+                    "        Number of Threads you want to use" + "\n" +
+                    "        example: -threads=16" + "\n" +
+                    "" + "\n" +
+                    "     -length={num}" + "\n" +
+                    "        required: yes" + "\n" +
+                    "        Length of the output text" + "\n" +
+                    "        example: -length=6" + "\n" +
+                    "" + "\n" +
+                    "     -IDs={num1};{num2};...." + "\n" +
+                    "        required: no (defaults to 1,2,3)" + "\n" +
+                    "       What IDs you want to search for. Separated with ','" + "\n" +
+                    "        example: -IDs=1;2;3;4;5;6" + "\n" +
+                    "" + "\n" +
+                    "    -chars=characters" + "\n" +
+                    "        required: no (defaults to lowercase alphabet + space + 0-9)</td>" + "\n" +
+                    "        The Characters the text can contain." + "\n" +
+                    "         NOTE: Can only be the LAST PARAMETER!!! Otherwise it would be difficult to separate characters/options" + "\n" +
+                    "        example: -chars=abcdefgh132465798 ABCDE" + "\n" +
+                    "" + "\n";
     /**
      * Characters the text can contain. Change this if you want to
      */
@@ -201,9 +200,7 @@ public class DimensionFinder {
         System.out.println("==================================================");
 
 
-
-        try (
-                final BufferedWriter writer = Files.newBufferedWriter(RESULT_PATH)) {
+        try (final BufferedWriter writer = Files.newBufferedWriter(RESULT_PATH)) {
             for (final Map.Entry<Integer, List<String>> entry : result.entrySet()) {
                 writer.write(entry.getKey() + ": ");
                 writer.write(Arrays.toString(entry.getValue().toArray()) + System.lineSeparator());
@@ -216,11 +213,7 @@ public class DimensionFinder {
         }
 
         System.out.println("Program finished. Press Enter to exit...");
-        new
-
-                Scanner(System.in).
-
-                next();
+        new Scanner(System.in).next();
         System.out.println("Bye!");
         System.exit(0);
     }
