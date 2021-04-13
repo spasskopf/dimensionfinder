@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -33,7 +34,7 @@ public class DimensionFinder {
     /**
      * The Path of the file, where the results get saved in.
      */
-    public static final Path RESULT_PATH = Path.of("result_" + new SimpleDateFormat("yyyy.MM.dd__hh.mm").format(new Date()) + ".txt");
+    public static final Path RESULT_PATH = Paths.get("result_" + new SimpleDateFormat("yyyy.MM.dd__hh.mm").format(new Date()) + ".txt");
 
     /**
      * Main Method
@@ -163,9 +164,9 @@ public class DimensionFinder {
 
 
         System.out.println("Printing results:");
-        System.out.println("=".repeat(50));
+        System.out.println("==================================================");
         result.forEach((integer, strings) -> System.out.printf("Strings for Hash %d: %s%n", integer, Arrays.toString(strings.toArray(new String[0]))));
-        System.out.println("=".repeat(50));
+        System.out.println("==================================================");
 
 
         try (final BufferedWriter writer = Files.newBufferedWriter(RESULT_PATH)) {
@@ -213,17 +214,15 @@ public class DimensionFinder {
             throw new IllegalArgumentException("Wrong parameters!");
         }
 
-        System.out.printf("""
-                         Starting search!
-                         =======================
-                         Parameters:
-                             ThreadCount   : %d
-                             Text length   : %d
-                             Dimension IDs : %s
-                             Characters    : %s
-                        =======================
-                                                
-                         """,
+        System.out.printf(
+                "Starting search!" + "\n" +
+                        "=======================" + "\n" +
+                        "   Parameters:" + "\n" +
+                        "   ThreadCount   : %d" + "\n" +
+                        "   Text length   : %d" + "\n" +
+                        "   Dimension IDs : %s" + "\n" +
+                        "   Characters    : %s" + "\n" +
+                        "=======================" + "\n",
                 threadCount,
                 textLength,
                 Arrays.toString(targetDimensionIds),
