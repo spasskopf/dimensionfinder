@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'me.spasskopf'
-version '1.0-SNAPSHOT'
+version '1.1-java8'
 
 repositories {
     mavenCentral()
@@ -14,10 +14,10 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     // https://mvnrepository.com/artifact/com.google.guava/guava
-    implementation group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
+    compile group: 'com.google.guava', name: 'guava', version: '30.1.1-jre'
 
     // https://mvnrepository.com/artifact/org.jetbrains/annotations
-    implementation group: 'org.jetbrains', name: 'annotations', version: '20.1.0'
+    compile group: 'org.jetbrains', name: 'annotations', version: '20.1.0'
 }
 
 test {
@@ -35,5 +35,8 @@ compileTestJava {
 jar {
     manifest {
         attributes("Main-Class": "me.spasskopf.dimensionfinder.DimensionFinder")
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
