@@ -17,6 +17,34 @@ import java.util.concurrent.TimeUnit;
  * Main class
  */
 public class DimensionFinder {
+
+    /**
+     * Help text
+     */
+    public static final String HELP_TEXT = """
+            Available Options:
+                 -threads={num}
+                    required: yes
+                    Number of Threads you want to use
+                    example: -threads=16
+
+                 -length={num}
+                    required: yes
+                    Length of the output text
+                    example: -length=6
+             
+                 -IDs={num1};{num2};....
+                    required: no (defaults to 1,2,3)
+                    What IDs you want to search for. Separated with ','
+                    example: -IDs=1;2;3;4;5;6
+                    
+                -chars=characters
+                    required: no (defaults to lowercase alphabet + space + 0-9)</td>
+                    The Characters the text can contain.
+                     NOTE: Can only be the LAST PARAMETER!!! Otherwise it would be difficult to separate characters/options
+                    example: -chars=abcdefgh132465798 ABCDE
+                                        
+            """;
     /**
      * Characters the text can contain. Change this if you want to
      */
@@ -61,14 +89,14 @@ public class DimensionFinder {
      *         <td>-length=6</td>
      *     </tr>
      *     <tr>
-     *         <td>-IDs</td>
+     *         <td>-IDs={num1};{num2};....</td>
      *         <td>no (defaults to 1,2,3)</td>
      *         <td>What IDs you want to search for. Separated with ','</td>
      *         <td>-IDs=1;2;3;4;5;6</td>
      *     </tr>
      *
-     *     <td>-chars=</td>
-     *     <td>mo (defaults to lowercase alphabet + space + 0-9)</td>
+     *     <td>-chars=characters</td>
+     *     <td>no (defaults to lowercase alphabet + space + 0-9)</td>
      *     <td>The Characters the text can contain. NOTE: Can only be the LAST PARAMETER!!! Otherwise it would be difficult to separate characters/options</td>
      *     <td>-chars=abcdefgh132465798 ABCDE</td>
      *
@@ -131,6 +159,10 @@ public class DimensionFinder {
                     String substring = joined.substring(joined.indexOf("-chars=") + "-chars=".length());
                     System.out.println("[INFO] Character option is used! Treating " + substring + " as Character Array!");
                     CHARS = substring.toCharArray();
+                } else if (arg.startsWith("-help")) {
+                    System.out.println(HELP_TEXT);
+                } else {
+                    System.err.println("Unrecognized Option " + arg + " use -help for help!");
                 }
             }
         }
@@ -163,24 +195,34 @@ public class DimensionFinder {
 
 
         System.out.println("Printing results:");
-        System.out.println("=".repeat(50));
+        System.out.println("=".
+
+                repeat(50));
         result.forEach((integer, strings) -> System.out.printf("Strings for Hash %d: %s%n", integer, Arrays.toString(strings.toArray(new String[0]))));
-        System.out.println("=".repeat(50));
+        System.out.println("=".
+
+                repeat(50));
 
 
-        try (final BufferedWriter writer = Files.newBufferedWriter(RESULT_PATH)) {
+        try (
+                final BufferedWriter writer = Files.newBufferedWriter(RESULT_PATH)) {
             for (final Map.Entry<Integer, List<String>> entry : result.entrySet()) {
                 writer.write(entry.getKey() + ": ");
                 writer.write(Arrays.toString(entry.getValue().toArray()) + System.lineSeparator());
             }
             System.out.printf("Saved results as %s%n", RESULT_PATH.toAbsolutePath().toString());
-        } catch (final IOException e) {
+        } catch (
+                final IOException e) {
             System.err.println("Could not save results as File!");
             e.printStackTrace();
         }
 
         System.out.println("Program finished. Press Enter to exit...");
-        new Scanner(System.in).next();
+        new
+
+                Scanner(System.in).
+
+                next();
         System.out.println("Bye!");
         System.exit(0);
     }
