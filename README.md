@@ -23,7 +23,7 @@ This tool brute-forces possible text in order to find dimension IDs for you.
 # Usage
 
 ## Downloaded Jar / Command Line
-
+The latest release can be found [here](https://github.com/spasskopf/dimensionfinder/releases/latest).  
 Run the Jar-File via the command-line (`cmd` or `terminal`).  
 The programm will ask for the necessary arguments.  
 Detailed Information can be found [here](https://github.com/spasskopf/dimensionfinder/wiki/How-do-I-use-this%3F).
